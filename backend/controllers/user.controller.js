@@ -32,7 +32,10 @@ async function register({ name, email, password }) {
     return user;
 }
 
-async function login({ email, password }) {
+async function login(body) {
+    const email = body.user.email
+    const password = body.user.password
+
     const user = await UserModel.findOne({
         email,
         authtype: 'email-password'
@@ -47,7 +50,7 @@ async function login({ email, password }) {
     if (!match) {
         throw new Error('The password is incorrect')
     }
-
+    console.log("check1")
     const token = generateToken(user.toJSON());
     return token;
 

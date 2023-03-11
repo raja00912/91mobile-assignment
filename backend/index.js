@@ -44,11 +44,7 @@ app.post('/login', async (req, res) => {
     try {
         const token = await login(body);
 
-        return res.send({
-            data: {
-                token
-            }
-        })
+        return res.status(200).send({ token: token })
     } catch (error) {
         if (error.message == 'User does not exist' || error.message == 'The password is incorrect') {
             return res.status(400).send({
