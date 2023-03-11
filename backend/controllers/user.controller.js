@@ -12,8 +12,10 @@ function generateToken(user) {
 }
 
 
-async function register({ name, email, password }) {
-    console.log("abc")
+async function register(body) {
+    const name = body.user.name
+    const email = body.user.email
+    const password = body.user.password
     const existing = await UserModel.findOne({ email }) || false;
     if (existing) {
         throw new Error('User already exists')
