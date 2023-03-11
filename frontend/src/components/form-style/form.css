@@ -1,0 +1,37 @@
+* {
+    background-color: aqua;
+}
+
+#form_parent_div {
+    width: 30%;
+    margin: 150px auto;
+    padding: 40px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+#form_parent_div button,
+#form_parent_div input {
+    padding: 7px 12px;
+    font-size: 18px;
+    margin-top: 8px;
+    border-radius: 8px;
+}
+
+#form_parent_div h2 {
+    background-color: white;
+    font-size: 30px;
+}
+
+#form_parent_div input {
+    width: 88%;
+    background-color: white;
+}
+
+#form_parent_div button {
+    width: 100%;
+    background-color: blue;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+}
