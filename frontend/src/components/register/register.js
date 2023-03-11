@@ -1,25 +1,38 @@
 import react, { useRef } from 'react'
 import '../form-style/form.css'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 function Register() {
     let nameReference = useRef(null);
     let emailReference = useRef(null);
     let passwordReference = useRef(null);
+    let navigate = useNavigate()
 
     const RegisterUser = async () => {
-        // try {
-        //     let res = await fetch('')
-        // } catch (error) {
-        //     console.log(error);
-        // }
+        const user = {
+            "name": nameReference.current.value,
+            "email": emailReference.current.value,
+            "password": passwordReference.current.value
+        }
+        try {
+            let res = await axios.post('https://91mobile-assignment-ng7j.vercel.app/register', {
+                user
+            })
+
+            alert("Account created successfully")
+            navigate('/login')
+        } catch (error) {
+            alert(error.response.data.error)
+        }
     }
 
     return (
         <div id='form_parent_div'>
-            <h2>Signup</h2>
+            <h2>Create An Account</h2>
             <input ref={nameReference} placeholder='Enter your name' />
-            <input ref={emailReference} placeholder='Enter your email' /><br />
-            <input ref={passwordReference} placeholder='Enter your password' /><br />
+            <input ref={emailReference} type="email" placeholder='Enter your email' /><br />
+            <input ref={passwordReference} type="password" placeholder='Enter your password' /><br />
             <button onClick={RegisterUser}>Signup</button>
         </div>
     )
