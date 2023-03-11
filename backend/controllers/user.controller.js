@@ -48,7 +48,7 @@ async function login({ email, password }) {
         throw new Error('The password is incorrect')
     }
 
-    const token = jwt.sign(user, process.env.JWT_SECRET_KEY);
+    const token = jwt.sign(user, "zcgjhsgcusag6752376@#");
     console.log(token)
     return token;
 
