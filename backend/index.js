@@ -10,14 +10,14 @@ app.use(cors());
 app.use(morgan('tiny'));
 app.use(express.static("build"));
 
-const { register } = require('./controllers/user.controller');
+const { register, login } = require('./controllers/user.controller');
 
 
 app.get("/", (req, res) => {
     res.send({ message: "Hello" });
 })
 
-app.post("/user/register", async (req, res) => {
+app.post("/register", async (req, res) => {
     const body = req.body;
     try {
         const user = await register(body);
@@ -31,6 +31,30 @@ app.post("/user/register", async (req, res) => {
             })
         }
         else {
+            return res.status(500).send({
+                error: 'Something went wrong'
+            })
+        }
+    }
+})
+
+app.post('/login', async (req, res) => {
+    const body = req.body
+
+    try {
+        const token = await login(body);
+
+        return res.send({
+            data: {
+                token
+            }
+        })
+    } catch (error) {
+        if (error.message == 'User does not exist' || error.message == 'The password is incorrect') {
+            return res.status(400).send({
+                error: error.message
+            })
+        } else {
             return res.status(500).send({
                 error: 'Something went wrong'
             })
