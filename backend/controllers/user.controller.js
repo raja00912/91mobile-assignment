@@ -15,14 +15,12 @@ function generateToken(user) {
 async function register(body) {
     const name = body.user.name
     const email = body.user.email
-    const password = body.user.password
+    let password = body.user.password
     const existing = await UserModel.findOne({ email }) || false;
     if (existing) {
         throw new Error('User already exists')
     }
-
     password = bcryptjs.hashSync(password);
-
 
     let user = await UserModel.create({
         name, email, password,
