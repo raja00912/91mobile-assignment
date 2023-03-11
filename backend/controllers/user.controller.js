@@ -3,13 +3,13 @@ const jwt = require('jsonwebtoken');
 require("dotenv").config();
 const bcryptjs = require('bcryptjs');
 
-function generateToken(user) {
-    if (user.password) {
-        delete user.password
-    }
+// function generateToken(user) {
+//     if (user.password) {
+//         delete user.password
+//     }
 
-    return jwt.sign(user, process.env.JWT_SECRET_KEY)
-}
+//     return jwt.sign(user, process.env.JWT_SECRET_KEY)
+// }
 
 
 async function register({ name, email, password }) {
@@ -48,7 +48,8 @@ async function login({ email, password }) {
         throw new Error('The password is incorrect')
     }
 
-    const token = generateToken(user.toJSON());
+    const token = jwt.sign(user, process.env.JWT_SECRET_KEY);
+    console.log(token)
     return token;
 
 }
