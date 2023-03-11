@@ -14,7 +14,7 @@ const { register, login } = require('./controllers/user.controller');
 
 
 app.get("/", (req, res) => {
-    res.send({ message: "Hello" });
+    res.send({ message: "Hello World" });
 })
 
 app.post("/register", async (req, res) => {
