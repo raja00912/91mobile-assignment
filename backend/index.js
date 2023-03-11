@@ -10,7 +10,7 @@ app.use(cors());
 app.use(morgan('tiny'));
 app.use(express.static("build"));
 
-const register = require('./controllers/user.controller');
+const { register } = require('./controllers/user.controller');
 
 
 app.get("/", (req, res) => {

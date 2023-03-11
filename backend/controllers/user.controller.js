@@ -4,13 +4,14 @@ require("dotenv").config();
 
 
 async function register({ name, email, password }) {
-    const existing = await UserModel.findOne({ email })
-
+    console.log("abc")
+    const existing = await UserModel.findOne({ email }) || false;
     if (existing) {
         throw new Error('User already exists')
     }
 
-    user = await UserModel.create({
+
+    let user = await UserModel.create({
         name, email, password,
         authtype: 'email-password'
     });
