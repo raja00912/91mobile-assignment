@@ -75,7 +75,7 @@ function Profile() {
                 <button onClick={UploadFile}>upload</button>
             </header>
             <div>
-                <table>
+                <table className="table">
                     <thead>
                         <tr>
                             <th>Sr No.</th>
@@ -90,7 +90,7 @@ function Profile() {
                                 <tr key={ind + 1}>
                                     <td>{ind + 1}</td>
                                     <td>{elem}</td>
-                                    <td><Link to={`http://localhost:5000/profile/${elem}`}>view</Link></td>
+                                    <td><Link to={`http://localhost:5000/profile/${elem}`} target="_blank" >view</Link></td>
                                     <td><button onClick={() => {
                                         DeleteFile(elem, ind);
                                     }}>delete</button></td>
@@ -100,6 +100,11 @@ function Profile() {
                     </tbody>
                 </table>
             </div>
+            <button className="logout" onClick={() => {
+                localStorage.removeItem("files");
+                localStorage.removeItem("token");
+                navigate("/");
+            }}>LogOut</button>
         </div>
     )
 }

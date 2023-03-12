@@ -35,3 +35,8 @@
     font-weight: 600;
     cursor: pointer;
 }
+
+#form_parent_div p,
+#form_parent_div a {
+    background-color: white;
+}

@@ -1,4 +1,70 @@
 #profile_parent_div {
     width: 50%;
     margin: auto;
+    background-color: white;
+    padding: 30px 10px 30px 40px;
+}
+
+#profile_parent_div label {
+    margin-right: 15px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.app-header button {
+    margin: 15px 0px 15px 40px;
+    font-size: 15px;
+    padding: 4px 25px;
+    background-color: rgb(225, 221, 221) !important;
+    border: none;
+}
+
+.table td,
+.table th {
+    border: 1px solid black;
+    padding: 5px 15px;
+}
+
+.table button {
+    background-color: rgb(229, 78, 78) !important;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.logout {
+    background-color: blue !important;
+    color: white;
+    margin-top: 20px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#profile_parent_div div,
+#profile_parent_div form,
+#profile_parent_div h2,
+#profile_parent_div header,
+#profile_parent_div table,
+#profile_parent_div tr,
+#profile_parent_div td,
+#profile_parent_div button,
+#profile_parent_div a,
+#profile_parent_div th,
+#profile_parent_div input,
+#profile_parent_div label {
+    background-color: white;
 }
