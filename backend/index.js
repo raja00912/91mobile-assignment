@@ -83,6 +83,16 @@ app.post("/upload", upload.single('profile'), (req, res) => {
     })
 })
 
+function errHandler(err, req, res, next) {
+    if (err instanceof multer.MulterError) {
+        res.json({
+            success: false,
+            message: err.message
+        })
+    }
+}
+
+app.use(errHandler);
 
 connect().then(() => {
     console.log("connected to db")
