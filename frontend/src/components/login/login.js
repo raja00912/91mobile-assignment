@@ -15,7 +15,7 @@ function Login() {
         }
 
         try {
-            let res = await axios.post('https://91mobile-assignment-ng7j.vercel.app/login', {
+            let res = await axios.post('http://localhost:5000/login', {
                 user
             })
             localStorage.setItem("token", res.data.token)
