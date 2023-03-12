@@ -4,7 +4,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const { connect } = require('./db/connect');
 
-
+const fs = require('fs')
 const multer = require("multer");
 const app = express();
 app.use(express.json());
@@ -12,11 +12,21 @@ app.use(cors());
 app.use(morgan('tiny'));
 app.use(express.static("build"));
 
-const { register, login } = require('./controllers/user.controller');
+const { register, login, getUser } = require('./controllers/user.controller');
 
 
 app.get("/", (req, res) => {
     res.send({ message: "Hello World" });
+})
+
+app.post("/user", async (req, res) => {
+    try {
+        let data = await getUser(req.body.id)
+        console.log("data");
+        res.status(200).send(data);
+    } catch (err) {
+        res.status(500).send({ Error: err });
+    }
 })
 
 app.post("/register", async (req, res) => {
@@ -45,9 +55,9 @@ app.post('/login', async (req, res) => {
     const body = req.body
 
     try {
-        const token = await login(body);
+        const data = await login(body);
 
-        return res.status(200).send({ token: token })
+        return res.status(200).send({ token: data.token, user: data.user })
     } catch (error) {
         if (error.message == 'User does not exist' || error.message == 'The password is incorrect') {
             return res.status(400).send({
@@ -84,6 +94,20 @@ app.post("/upload", upload.single('file'), (req, res) => {
         name: req.file.filename
     })
 })
+
+app.delete("/delete/:file", async (req, res) => {
+    let file = req.params
+    // console.log(file.file);
+    try {
+        fs.unlinkSync(`./upload/files/${file.file}`)
+        res.status(200).send({ message: "File deleted successfully" })
+    } catch (err) {
+        res.status(500).send("Error - " + err)
+    }
+
+})
+
+
 
 function errHandler(err, req, res, next) {
     if (err instanceof multer.MulterError) {

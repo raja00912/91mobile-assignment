@@ -8,7 +8,21 @@ function generateToken(user) {
         delete user.password
     }
 
-    return jwt.sign({ email: user.email, password: user.password }, "zcgjhsgcusag6752376@#");
+    return jwt.sign({ email: user.email, password: user.password }, "process.env.JWT_SECRET_KEY");
+}
+
+async function getUser(id) {
+    // try {
+    console.log(id);
+    const data = await UserModel.findById(id)
+    res.send(data);
+
+    // } catch (err) {
+    //     console.log("check")
+    //     return res.status(400).send({
+    //         error: 'Invalid user id provided'
+    //     })
+    // }
 }
 
 
@@ -52,10 +66,10 @@ async function login(body) {
     }
     console.log("check1")
     const token = generateToken(user.toJSON());
-    return token;
+    return { token: token, user: user };
 
 }
 
 module.exports = {
-    register, login
+    register, login, getUser
 }

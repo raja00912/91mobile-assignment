@@ -6,19 +6,15 @@ async function findById(id) {
 }
 
 async function createFiles(userId, filename, url) {
-    try {
-        const file = await FileModel.create({
-            url: url,
-            name: filename,
-            author: {
-                _id: userId
-            }
-        })
-        return file
-
-    } catch (err) {
-        return err;
-    }
+    file = await FileModel.create({
+        url: url,
+        name: filename,
+        author: {
+            _id: userId
+        }
+    })
+    file = file.toJSON();
+    return file
 
 }
 
