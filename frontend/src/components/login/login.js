@@ -1,12 +1,14 @@
-import react, { useRef } from 'react'
+import react, { useContext, useRef, useState } from 'react'
 import '../form-style/form.css'
 import axios from 'axios';
 import { useNavigate } from 'react-router';
+import mycontext from '../../context/context';
 
 function Login() {
     let emailReference = useRef(null);
     let passwordReference = useRef(null);
     let navigate = useNavigate();
+    let [user, setUser] = useContext(mycontext);
 
     const LoginUser = async () => {
         let user = {
@@ -18,8 +20,9 @@ function Login() {
             let res = await axios.post('http://localhost:5000/login', {
                 user
             })
+            setUser(res.data.user);
             localStorage.setItem("token", res.data.token)
-            navigate('/');
+            navigate('/profile');
         } catch (error) {
             alert(error.response.data.error)
         }

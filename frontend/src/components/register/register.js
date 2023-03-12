@@ -16,12 +16,12 @@ function Register() {
             "password": passwordReference.current.value
         }
         try {
-            let res = await axios.post('https://91mobile-assignment-ng7j.vercel.app/register', {
+            let res = await axios.post('http://localhost:5000/register', {
                 user
             })
 
             alert("Account created successfully")
-            navigate('/login')
+            navigate('/')
         } catch (error) {
             alert(error.response.data.error)
         }

@@ -2,15 +2,19 @@ import Login from './components/login/login';
 import Register from './components/register/register';
 import { Routes, Route } from 'react-router-dom'
 import Profile from './components/profile/profile';
+import mycontext from "./context/context"
+import { useState } from 'react';
 
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route path='/register' element={<Register />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/' element={<Profile />} />
-      </Routes>
+      <mycontext.Provider value={useState({ name: "", email: "", url: "" })} >
+        <Routes>
+          <Route path='/' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/profile' element={<Profile />} />
+        </Routes>
+      </mycontext.Provider>
     </div>
   );
 }
