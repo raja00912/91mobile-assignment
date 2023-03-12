@@ -79,7 +79,7 @@ app.use('/profile', express.static('upload/files'));
 app.post("/upload", upload.single('profile'), (req, res) => {
     res.json({
         success: true,
-        profile_url: `http://localhost:5000/profile/${req.file.filename}`
+        profile_url: `https://91mobile-assignment-ng7j.vercel.app/profile/${req.file.filename}`
     })
 })
 
