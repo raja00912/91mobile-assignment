@@ -4,6 +4,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 const { connect } = require('./db/connect');
 
+const multer = require("multer");
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -57,6 +58,29 @@ app.post('/login', async (req, res) => {
             })
         }
     }
+})
+
+const storage = multer.diskStorage({
+    destination: './upload/files',
+    filename: (req, file, cb) => {
+        return cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`)
+    }
+})
+
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 1000000
+    }
+})
+
+app.use('/profile', express.static('upload/files'));
+
+app.post("/upload", upload.single('profile'), (req, res) => {
+    res.json({
+        success: true,
+        profile_url: `http://localhost:5000/profile/${req.file.filename}`
+    })
 })
 
 
