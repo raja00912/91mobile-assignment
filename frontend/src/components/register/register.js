@@ -1,4 +1,4 @@
-import react, { useRef } from 'react'
+import react, { useEffect, useRef } from 'react'
 import '../form-style/form.css'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
@@ -14,6 +14,7 @@ function Register() {
             /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         );
     };
+
 
     const RegisterUser = async () => {
         const user = {
@@ -45,6 +46,14 @@ function Register() {
             alert("Enter a valid email address")
         }
     }
+
+    useEffect(() => {
+        let token = localStorage.getItem("token");
+        if (token) {
+            navigate("/profile")
+        }
+
+    }, [])
 
     return (
         <div id='form_parent_div'>
