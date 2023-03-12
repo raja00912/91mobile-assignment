@@ -3,23 +3,12 @@ const path = require("path");
 const cors = require("cors");
 const morgan = require("morgan");
 const { connect } = require('./db/connect');
-const config = {
-    headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
-    }
-};
+
 
 const multer = require("multer");
 const app = express();
 app.use(express.json());
 app.use(cors());
-const corsOptions = {
-    origin: 'https://91mobile-assignment-ng7j.vercel.app',
-    credentials: true,
-    optionSuccessStatus: 200
-}
-app.use(cors(corsOptions));
 app.use(morgan('tiny'));
 app.use(express.static("build"));
 
@@ -89,9 +78,10 @@ const upload = multer({
 app.use('/profile', express.static('upload/files'));
 
 app.post("/upload", upload.single('file'), (req, res) => {
-    res.json({
+    res.send({
         success: true,
-        profile_url: `http://localhost:5000/profile/${req.file.filename}`
+        profile_url: `http://localhost:5000/profile/${req.file.filename}`,
+        name: req.file.filename
     })
 })
 
