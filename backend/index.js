@@ -15,9 +15,9 @@ app.use(express.static("build"));
 const { register, login, getUser } = require('./controllers/user.controller');
 
 
-app.get("/", (req, res) => {
-    res.send({ message: "Hello World" });
-})
+// app.get("/", (req, res) => {
+//     res.send({ message: "Hello World" });
+// })
 
 app.post("/user", async (req, res) => {
     try {

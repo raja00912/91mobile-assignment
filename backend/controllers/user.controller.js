@@ -12,17 +12,11 @@ function generateToken(user) {
 }
 
 async function getUser(id) {
-    // try {
     console.log(id);
     const data = await UserModel.findById(id)
     res.send(data);
 
-    // } catch (err) {
-    //     console.log("check")
-    //     return res.status(400).send({
-    //         error: 'Invalid user id provided'
-    //     })
-    // }
+
 }
 
 
