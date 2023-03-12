@@ -3,6 +3,12 @@ const path = require("path");
 const cors = require("cors");
 const morgan = require("morgan");
 const { connect } = require('./db/connect');
+const config = {
+    headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS"
+    }
+};
 
 const multer = require("multer");
 const app = express();
